@@ -1,6 +1,6 @@
 import User from "./User";
 
-function List({ users, onDelete, onView, onEdit, onLocationClick }) {
+function List({ users, onDelete, onView, onEdit, onLocationClick, onChartClick}) {
   return (
     <div className="w-full bg-gray-300  p-2 rounded-xl shadow-md mt-3">
       <div className="p-4 bg-gray-300 ">
@@ -23,6 +23,7 @@ function List({ users, onDelete, onView, onEdit, onLocationClick }) {
                 onView={onView}
                 onEdit={onEdit}
                 onLocationClick={onLocationClick}
+                onChartClick={onChartClick}
               />
             );
           })}

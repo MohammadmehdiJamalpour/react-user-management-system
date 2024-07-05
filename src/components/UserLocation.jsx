@@ -9,7 +9,7 @@ function UserLocation({ isOpen, onClose, location }) {
     <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 z-50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-5   ">
         <div className="flex items-center justify-between pb-3">
-          <h3>موقعیت کاربر :</h3>
+          <h3 className="text-xl font-bold">موقعیت کاربر :</h3>
           <button className="  hover:text-gray-700" onClick={onClose}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

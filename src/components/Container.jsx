@@ -5,6 +5,7 @@ import usersData from "../users.json";
 import ViewUser from "./ViewUser";
 import EditUser from "./EditUser";
 import UserLocation from "./UserLocation";
+import UserChart from "./UserChart";
 
 function Container() {
   const [users, setUsers] = useState(usersData);
@@ -87,6 +88,19 @@ function Container() {
     setIsMapModalOpen(false);
   };
 
+  const [isChartOpen, setIsChartOpen] = useState(false);
+
+  const handleChartClick = (userId) => {
+    const user = users.find((u) => u.id === userId);
+    setSelectedUser(user);
+    setIsChartOpen(true);
+  };
+
+  const handleChartClose = () => {
+    setIsChartOpen(false);
+    setSelectedUser(null);
+  };
+
   return (
     <div className="container gap-2 flex flex-col mx-auto px-4 pt-4 max-w-5xl">
       <SearchBar onAddUser={handleAddUser} onSearch={handleSearch} />
@@ -95,7 +109,8 @@ function Container() {
         onDelete={handleDeleteUser}
         onView={handleViewUser}
         onEdit={handleEditUser}
-        onLocationClick={handleLocationClick} // Add this prop to pass to the List component
+        onLocationClick={handleLocationClick}
+        onChartClick={handleChartClick}
       />
       <ViewUser
         isOpen={isViewUserOpen}
@@ -113,6 +128,11 @@ function Container() {
         isOpen={isMapModalOpen}
         onClose={handleCloseMapModal}
         location={location}
+      />
+      <UserChart
+        isOpen={isChartOpen}
+        onClose={handleChartClose}
+        user={selectedUser}
       />
     </div>
   );
