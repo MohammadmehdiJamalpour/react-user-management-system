@@ -51,7 +51,7 @@ const UserChart = ({ isOpen, onClose, user }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-75 z-50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-4 relative">
         <button
-          className="absolute top-2 left-5 my-1 rounded-full bg-gray-400 text-white p-0.5 transition duration-300  hover:bg-gray-600"
+          className="absolute top-2 left-5 my-1 rounded-full bg-gray-400 text-white  transition duration-300  hover:bg-gray-600"
           onClick={onClose}
         >
           <svg
@@ -60,7 +60,7 @@ const UserChart = ({ isOpen, onClose, user }) => {
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="w-6 h-6"
+            className="w-7 h-7  bg-gray-400 hover:bg-gray-600 transition duration-300 rounded-full  text-white p-1"
           >
             <path
               strokeLinecap="round"

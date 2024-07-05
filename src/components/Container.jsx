@@ -33,6 +33,7 @@ function Container() {
     setUsers(filteredUsers);
   };
 
+  // show ViewUser Component based on Click
   const [isViewUserOpen, setIsViewUserOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -46,6 +47,8 @@ function Container() {
     setSelectedUser(null);
     setIsViewUserOpen(false);
   };
+
+  // show EditUser Component based on Click and Edit the User Data
 
   const [isEditUserOpen, setIsEditUserOpen] = useState(false);
 
@@ -67,6 +70,7 @@ function Container() {
     setIsEditUserOpen(false);
   };
 
+  // show UserLocation Component based on Click
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [location, setLocation] = useState({
     latitude: 35.6892,
@@ -87,6 +91,8 @@ function Container() {
   const handleCloseMapModal = () => {
     setIsMapModalOpen(false);
   };
+
+  // show UserChart Component based on Click
 
   const [isChartOpen, setIsChartOpen] = useState(false);
 

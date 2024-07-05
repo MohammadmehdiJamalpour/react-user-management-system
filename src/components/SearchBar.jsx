@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import AddUserModal from "./AddUser"; // Adjust the import path as needed
+import AddUser from "./AddUser"; 
 
 function SearchBar({ onAddUser, onSearch }) {
   const [name, setName] = useState("");
@@ -7,6 +7,8 @@ function SearchBar({ onAddUser, onSearch }) {
   const [idCardNumber, setIdCardNumber] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+  // Search based on any change in any input 
   useEffect(() => {
     onSearch({ name, familyName, idCardNumber });
   }, [name, familyName, idCardNumber]);
@@ -69,7 +71,7 @@ function SearchBar({ onAddUser, onSearch }) {
           </button>
         </div>
       </div>
-      <AddUserModal
+      <AddUser
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleAddUser}

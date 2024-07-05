@@ -29,22 +29,16 @@ function ViewUser({ isOpen, onClose, user }) {
           </button>
         </div>
         <div className="mt-4 flex flex-col gap-3">
-          {user ? (
-            <>
-              <p>
-                <span className="font-bold">نام :</span> {user.name}
-              </p>
-              <p>
-                <span className="font-bold">نام خانوادگی : </span>
-                {user.familyName}
-              </p>
-              <p>
-                <span className="font-bold">کد ملی :</span> {user.idCardNumber}
-              </p>
-            </>
-          ) : (
-            <p>No user selected</p>
-          )}
+          <p>
+            <span className="font-bold">نام :</span> {user.name}
+          </p>
+          <p>
+            <span className="font-bold">نام خانوادگی : </span>
+            {user.familyName}
+          </p>
+          <p>
+            <span className="font-bold">کد ملی :</span> {user.idCardNumber}
+          </p>
         </div>
       </div>
     </div>
