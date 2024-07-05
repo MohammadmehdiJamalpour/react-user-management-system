@@ -4,10 +4,12 @@ import { useState } from "react";
 import usersData from "../users.json";
 import ViewUser from "./ViewUser";
 import EditUser from "./EditUser";
+import UserLocation from "./UserLocation";
 
 function Container() {
   const [users, setUsers] = useState(usersData);
   const [allUsers] = useState(usersData);
+
   const handleAddUser = (newUser) => {
     setUsers((users) => [...users, newUser]);
   };
@@ -64,21 +66,53 @@ function Container() {
     setIsEditUserOpen(false);
   };
 
+  const [isMapModalOpen, setIsMapModalOpen] = useState(false);
+  const [location, setLocation] = useState({
+    latitude: 35.6892,
+    longitude: 51.389,
+  });
+
+  const handleLocationClick = (userId) => {
+    const user = users.find((u) => u.id === userId);
+    if (user) {
+      setLocation({
+        latitude: user.latitude || 35.6892,
+        longitude: user.longitude || 51.389,
+      });
+    }
+    setIsMapModalOpen(true);
+  };
+
+  const handleCloseMapModal = () => {
+    setIsMapModalOpen(false);
+  };
+
   return (
-    <div className="container gap-2 flex flex-col mx-auto px-4 pt-4 max-w-5xl ">
+    <div className="container gap-2 flex flex-col mx-auto px-4 pt-4 max-w-5xl">
       <SearchBar onAddUser={handleAddUser} onSearch={handleSearch} />
-      <List users={users} onDelete={handleDeleteUser} onView={handleViewUser} onEdit={handleEditUser} />
+      <List
+        users={users}
+        onDelete={handleDeleteUser}
+        onView={handleViewUser}
+        onEdit={handleEditUser}
+        onLocationClick={handleLocationClick} // Add this prop to pass to the List component
+      />
       <ViewUser
         isOpen={isViewUserOpen}
         onClose={handleViewUserClose}
         user={selectedUser}
-        onEdit={handleEditUser} 
+        onEdit={handleEditUser}
       />
       <EditUser
         isOpen={isEditUserOpen}
         onClose={handleEditUserClose}
         user={selectedUser}
         onSave={handleEditUserSave}
+      />
+      <UserLocation
+        isOpen={isMapModalOpen}
+        onClose={handleCloseMapModal}
+        location={location}
       />
     </div>
   );
