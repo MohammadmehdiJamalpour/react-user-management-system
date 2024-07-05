@@ -1,4 +1,11 @@
-function User({ user, index, onDelete }) {
+function User({ user, index, onDelete, onView, onEdit }) {
+  const handleView = () => {
+    onView(user.id);
+  };
+
+  const handleEditClick = () => {
+    onEdit(user.id);
+  };
   return (
     <div className="grid grid-cols-5 bg-gray-100 items-center border-b border-opacity-30 border-gray-400">
       <p className=" py-2 justify-self-center">{index + 1}</p>
@@ -8,6 +15,7 @@ function User({ user, index, onDelete }) {
       <div className=" py-2 justify-self-center flex gap-1 ">
         {/* show profile */}
         <svg
+          onClick={handleView}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -28,6 +36,7 @@ function User({ user, index, onDelete }) {
         </svg>
         {/* edit profile  */}
         <svg
+          onClick={handleEditClick}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
