@@ -40,12 +40,12 @@ function SearchBar({ onAddUser, onSearch }) {
       <div className="flex bg-gray-100 shadow-sm p-3 mt-4  rounded-xl justify-between ">
         <div className="flex gap-4    ">
           <div className="flex gap-1 items-center ">
-            <label htmlFor="nameInput" className="text-gray-600">
+            <label htmlFor="name" className="text-gray-600">
               نام :
             </label>
             <input
               type="text"
-              id="nameInput"
+              id="name"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -56,7 +56,7 @@ function SearchBar({ onAddUser, onSearch }) {
             />
           </div>
           <div className="flex gap-1 items-center">
-            <label htmlFor="familyNameInput" className="text-gray-700">نام خانوادگی :</label>
+            <label htmlFor="familyName" className="text-gray-700">نام خانوادگی :</label>
             <input
               type="text"
               
@@ -66,11 +66,11 @@ function SearchBar({ onAddUser, onSearch }) {
               }}
               className="bg-inherit border rounded-lg p-1 text-sm focus:outline-none focus:border-2 focus:border-gray-300"
               name=""
-              id="familyNameInput"
+              id="familyName"
             />
           </div>
           <div className="flex gap-1 items-center">
-            <label htmlFor="idCardNumberInput" className="text-gray-700">کد ملی :</label>
+            <label htmlFor="idCardNumber" className="text-gray-700">کد ملی :</label>
             <input
               type="text"
               
@@ -80,7 +80,7 @@ function SearchBar({ onAddUser, onSearch }) {
               }}
               className="bg-inherit border rounded-lg p-1 text-sm focus:outline-none focus:border-2 focus:border-gray-300"
               name=""
-              id="idCardNumberInput"
+              id="idCardNumber"
             />
           </div>
         </div>
