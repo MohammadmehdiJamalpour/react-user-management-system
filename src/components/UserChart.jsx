@@ -27,7 +27,7 @@ const UserChart = ({ isOpen, onClose, user }) => {
     labels: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر"],
     datasets: [
       {
-        label: "تعداد ورود ها",
+        label: "تعداد ورود در هر ماه :",
         data: [3, 2, 5, 1, 4, 2, 5],
         backgroundColor: "rgba(128, 128, 128, 0.5)",
       },
@@ -39,10 +39,36 @@ const UserChart = ({ isOpen, onClose, user }) => {
     plugins: {
       legend: {
         position: "top",
+        labels: {
+          font: {
+            size: 13,
+            family: "'iransans', sans-serif",
+          },
+        },
       },
       title: {
         display: true,
-        text: `تعداد ورود :   ${user.name} ${user.familyName}`,
+        text: `تعداد ورود  کاربر :   ${user.name} ${user.familyName}`,
+        font: {
+          size: 20,
+          family: "'iransans', sans-serif",
+        },
+      },
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            family: "'iransans', sans-serif",
+          },
+        },
+      },
+      y: {
+        ticks: {
+          font: {
+            family: "'iransans', sans-serif",
+          },
+        },
       },
     },
   };
