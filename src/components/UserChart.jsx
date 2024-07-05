@@ -27,7 +27,7 @@ const UserChart = ({ isOpen, onClose, user }) => {
     labels: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر"],
     datasets: [
       {
-        label: "تعداد ورود در هر ماه :",
+        label: "تعداد ورود در هر ماه ",
         data: [3, 2, 5, 1, 4, 2, 5],
         backgroundColor: "rgba(128, 128, 128, 0.5)",
       },

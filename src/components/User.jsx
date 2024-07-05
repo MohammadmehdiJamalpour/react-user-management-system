@@ -1,32 +1,6 @@
 import React from "react";
 
-function User({
-  user,
-  index,
-  onDelete,
-  onView,
-  onEdit,
-  onLocationClick,
-  onChartClick,
-}) {
-  const handleView = () => {
-    onView(user.id);
-  };
-
-  const handleEditClick = () => {
-    onEdit(user.id);
-  };
-
-  const handleLocationClick = () => {
-    onLocationClick(user.id);
-  };
-
-  const handleChartClick = () => {
-    onChartClick(user.id);
-  };
-
- 
-
+function User({ user, index, onDelete, onView, onEdit, onLocationClick, onChartClick }) {
   return (
     <div className="grid grid-cols-5 bg-gray-100 items-center border-b border-opacity-30 border-gray-400">
       <p className="py-2 justify-self-center">{index + 1}</p>
@@ -36,7 +10,7 @@ function User({
       <div className="py-2 justify-self-center flex gap-1">
         {/* Show profile */}
         <svg
-          onClick={handleView}
+          onClick={() => onView(user.id)}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -57,7 +31,7 @@ function User({
         </svg>
         {/* Edit profile */}
         <svg
-          onClick={handleEditClick}
+          onClick={() => onEdit(user.id)}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -89,7 +63,7 @@ function User({
         </svg>
         {/* User location */}
         <svg
-          onClick={handleLocationClick}
+          onClick={() => onLocationClick(user.id)}
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -109,21 +83,12 @@ function User({
           />
         </svg>
         {/* User chart */}
+        
         <svg
-          onClick={handleChartClick}
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="md:size-5 lg:size-6 cursor-pointer"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"
-          />
-        </svg>
+        onClick={() => onChartClick(user.id)}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="md:size-5 lg:size-6 cursor-pointer">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6" />
+</svg>
+
       </div>
     </div>
   );

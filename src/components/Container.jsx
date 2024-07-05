@@ -6,6 +6,7 @@ import ViewUser from "./ViewUser";
 import EditUser from "./EditUser";
 import UserLocation from "./UserLocation";
 import UserChart from "./UserChart";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 function Container() {
   const [users, setUsers] = useState(usersData);
@@ -49,7 +50,6 @@ function Container() {
   };
 
   // show EditUser Component based on Click and Edit the User Data
-
   const [isEditUserOpen, setIsEditUserOpen] = useState(false);
 
   const handleEditUser = (userId) => {
@@ -93,7 +93,6 @@ function Container() {
   };
 
   // show UserChart Component based on Click
-
   const [isChartOpen, setIsChartOpen] = useState(false);
 
   const handleChartClick = (userId) => {
@@ -107,12 +106,35 @@ function Container() {
     setSelectedUser(null);
   };
 
+  // Manage delete confirmation modal state
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null);
+
+  const handleDeleteClick = (userId) => {
+    const user = users.find((u) => u.id === userId);
+    setUserToDelete(user);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (userToDelete) {
+      handleDeleteUser(userToDelete.id);
+    }
+    setIsDeleteModalOpen(false);
+    setUserToDelete(null);
+  };
+
+  const handleCancelDelete = () => {
+    setIsDeleteModalOpen(false);
+    setUserToDelete(null);
+  };
+
   return (
     <div className="container gap-2 flex flex-col mx-auto px-4 pt-4 max-w-5xl">
       <SearchBar onAddUser={handleAddUser} onSearch={handleSearch} />
       <List
         users={users}
-        onDelete={handleDeleteUser}
+        onDelete={handleDeleteClick} // Pass the handleDeleteClick method
         onView={handleViewUser}
         onEdit={handleEditUser}
         onLocationClick={handleLocationClick}
@@ -139,6 +161,11 @@ function Container() {
         isOpen={isChartOpen}
         onClose={handleChartClose}
         user={selectedUser}
+      />
+      <DeleteConfirmationModal
+        isOpen={isDeleteModalOpen}
+        onClose={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
       />
     </div>
   );

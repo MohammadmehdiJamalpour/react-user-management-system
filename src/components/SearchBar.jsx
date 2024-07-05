@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import AddUser from "./AddUser"; 
 
 function SearchBar({ onAddUser, onSearch }) {
+
+  const isNumber = (value) => {
+    return /^\d+$/.test(value);
+  };
+  
   const [name, setName] = useState("");
   const [familyName, setFamilyName] = useState("");
   const [idCardNumber, setIdCardNumber] = useState("");

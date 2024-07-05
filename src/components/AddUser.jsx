@@ -11,13 +11,58 @@ function AddUser({ isOpen, onClose, onSave }) {
     }));
   };
 
+    // Regular expression for Persian characters
+    const persianRegex = /^[\u0600-\u06FF\s]+$/;
+
+    // Validation function for Persian characters
+    const isPersian = (value) => {
+      return persianRegex.test(value);
+    };
+
   const handleSave = () => {
     if (!newUser.name || !newUser.familyName || !newUser.idCardNumber) {
       alert("لطفا اطلاعات صحیح را وارد کنید");
       return;
     }
+
+    if (newUser.name.length < 2) {  
+      alert("نام باید حداقل ۲ کاراکتر باشد");  
+      return;
+    }
+
+    if (!isPersian(newUser.name)) {
+      alert("نام باید فقط شامل حروف فارسی باشد");
+      return;
+    }
+
+    if (newUser.familyName.length < 3) {
+      alert("نام خانوادگی باید حداقل ۳ کاراکتر باشد");
+      return;
+    }
+
+
+    if (!isPersian(newUser.familyName)) {
+      alert("نام خانوادگی باید فقط شامل حروف فارسی باشد");
+      return;
+    }
+
+    if (!isNumber(newUser.idCardNumber)) {
+      alert("لطفاً کد ملی را به صورت عدد وارد کنید");
+      return;
+    }
+
+    if (newUser.idCardNumber.length !== 10) {
+      alert("کد ملی باید دقیقاً 10 رقم باشد");
+      return;
+    }
+
     onSave({ ...newUser, id: Date.now() });
+    setNewUser({ name: "", familyName: "", idCardNumber: "" });
     onClose();
+  };
+
+  const isNumber = (value) => {
+    return /^\d+$/.test(value);
   };
 
   if (!isOpen) return null;
@@ -27,10 +72,7 @@ function AddUser({ isOpen, onClose, onSave }) {
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-4">
         <div className="flex justify-between items-center border-b pb-2">
           <h2 className="text-xl font-bold">افزودن کاربر جدید</h2>
-          <button
-            className="text-gray-500 hover:text-gray-700"
-            onClick={onClose}
-          >
+          <button className="text-gray-500 hover:text-gray-700" onClick={onClose}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -39,11 +81,7 @@ function AddUser({ isOpen, onClose, onSave }) {
               stroke="currentColor"
               className="size-7 rounded-full inline-block p-1 bg-gray-400 text-white hover:bg-gray-600 transition duration-300"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18 18 6M6 6l12 12"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
