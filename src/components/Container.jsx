@@ -1,25 +1,55 @@
+import React, { useState, useEffect } from "react";
 import SearchBar from "./SearchBar";
 import List from "./List";
-import { useState } from "react";
-import usersData from "../users.json";
 import ViewUser from "./ViewUser";
 import EditUser from "./EditUser";
 import UserLocation from "./UserLocation";
 import UserChart from "./UserChart";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { getUsers, addUser, editUser, deleteUser } from "../utils/jsonUtils";
 
 function Container() {
-  const [users, setUsers] = useState(usersData);
-  const [allUsers] = useState(usersData);
+  const [users, setUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
 
-  const handleAddUser = (newUser) => {
-    setUsers((users) => [...users, newUser]);
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getUsers();
+        setUsers(data);
+        setAllUsers(data);
+      } catch (error) {
+        console.error("Error fetching users data:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+  // Function to add a new user
+  const handleAddUser = async (newUser) => {
+    try {
+      await addUser(newUser);
+      const data = await getUsers();
+      setUsers(data);
+      setAllUsers(data);
+    } catch (error) {
+      console.error("Error adding user:", error);
+    }
   };
 
-  const handleDeleteUser = (id) => {
-    setUsers((users) => users.filter((u) => u.id !== id));
+  // Function to delete a user
+  const handleDeleteUser = async (id) => {
+    try {
+      await deleteUser(id);
+      const data = await getUsers();
+      setUsers(data);
+      setAllUsers(data);
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
 
+  // Function to search users based on criteria
   const handleSearch = (searchCriteria) => {
     const filteredUsers = allUsers.filter((user) => {
       return (
@@ -30,11 +60,23 @@ function Container() {
           user.idCardNumber.includes(searchCriteria.idCardNumber))
       );
     });
-
     setUsers(filteredUsers);
   };
 
-  // show ViewUser Component based on Click
+  // Function to edit user data
+  const handleEditUserSave = async (editedUser) => {
+    try {
+      await editUser(editedUser);
+      const data = await getUsers();
+      setUsers(data);
+      setAllUsers(data);
+      setIsEditUserOpen(false);
+    } catch (error) {
+      console.error("Error editing user:", error);
+    }
+  };
+
+  // Function to open ViewUser modal
   const [isViewUserOpen, setIsViewUserOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
@@ -49,28 +91,20 @@ function Container() {
     setIsViewUserOpen(false);
   };
 
-  // show EditUser Component based on Click and Edit the User Data
+  // Function to open EditUser modal
   const [isEditUserOpen, setIsEditUserOpen] = useState(false);
 
-  const handleEditUser = (userId) => {
+  const handleEditUserOpen = (userId) => {
     const user = users.find((u) => u.id === userId);
     setSelectedUser(user);
     setIsEditUserOpen(true);
-  };
-
-  const handleEditUserSave = (editedUser) => {
-    const updatedUsers = users.map((user) =>
-      user.id === editedUser.id ? editedUser : user
-    );
-    setUsers(updatedUsers);
-    setIsEditUserOpen(false);
   };
 
   const handleEditUserClose = () => {
     setIsEditUserOpen(false);
   };
 
-  // show UserLocation Component based on Click
+  // Function to handle UserLocation modal
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [location, setLocation] = useState({
     latitude: 35.6892,
@@ -79,10 +113,15 @@ function Container() {
 
   const handleLocationClick = (userId) => {
     const user = users.find((u) => u.id === userId);
-    if (user) {
+    if (user && user.cords) {
       setLocation({
-        latitude: user.latitude || 35.6892,
-        longitude: user.longitude || 51.389,
+        latitude: user.cords.latitude || 35.6892,
+        longitude: user.cords.longitude || 51.389,
+      });
+    } else {
+      setLocation({
+        latitude: 35.6892,
+        longitude: 51.389,
       });
     }
     setIsMapModalOpen(true);
@@ -92,7 +131,7 @@ function Container() {
     setIsMapModalOpen(false);
   };
 
-  // show UserChart Component based on Click
+  // Function to handle UserChart modal
   const [isChartOpen, setIsChartOpen] = useState(false);
 
   const handleChartClick = (userId) => {
@@ -106,7 +145,7 @@ function Container() {
     setSelectedUser(null);
   };
 
-  // Manage delete confirmation modal state
+  // Function to handle delete confirmation modal
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
 
@@ -134,9 +173,9 @@ function Container() {
       <SearchBar onAddUser={handleAddUser} onSearch={handleSearch} />
       <List
         users={users}
-        onDelete={handleDeleteClick} // Pass the handleDeleteClick method
+        onDelete={handleDeleteClick}
         onView={handleViewUser}
-        onEdit={handleEditUser}
+        onEdit={handleEditUserOpen}
         onLocationClick={handleLocationClick}
         onChartClick={handleChartClick}
       />
@@ -144,7 +183,7 @@ function Container() {
         isOpen={isViewUserOpen}
         onClose={handleViewUserClose}
         user={selectedUser}
-        onEdit={handleEditUser}
+        onEdit={handleEditUserOpen}
       />
       <EditUser
         isOpen={isEditUserOpen}

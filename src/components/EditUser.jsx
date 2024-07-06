@@ -25,7 +25,11 @@ function EditUserModal({ isOpen, onClose, user, onSave }) {
   };
 
   const validateInputs = () => {
-    if (!editedUser.name || !editedUser.familyName || !editedUser.idCardNumber) {
+    if (
+      !editedUser.name ||
+      !editedUser.familyName ||
+      !editedUser.idCardNumber
+    ) {
       alert("لطفا اطلاعات صحیح را وارد کنید");
       return false;
     }
@@ -37,11 +41,11 @@ function EditUserModal({ isOpen, onClose, user, onSave }) {
       alert("نام خانوادگی باید حداقل ۲ کاراکتر باشد");
       return false;
     }
-    if (!/^[۰-۹0-9آ-ی]+$/.test(editedUser.name)) {
+    if (!/^[\u0600-\u06FF0-9 ]+$/.test(editedUser.name)) {
       alert("نام باید فارسی باشد");
       return false;
     }
-    if (!/^[۰-۹0-9آ-ی]+$/.test(editedUser.familyName)) {
+    if (!/^[\u0600-\u06FF0-9 ]+$/.test(editedUser.familyName)) {
       alert("نام خانوادگی باید فارسی باشد");
       return false;
     }
@@ -59,7 +63,10 @@ function EditUserModal({ isOpen, onClose, user, onSave }) {
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-4">
         <div className="flex justify-between items-center border-b pb-2">
           <h2 className="text-xl font-bold">ویرایش</h2>
-          <button className="text-gray-500 hover:text-gray-700" onClick={onClose}>
+          <button
+            className="text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -68,7 +75,11 @@ function EditUserModal({ isOpen, onClose, user, onSave }) {
               stroke="currentColor"
               className="size-7 rounded-full inline-block p-1 bg-gray-400 text-white hover:bg-gray-600 transition duration-300"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>
@@ -112,7 +123,7 @@ function EditUserModal({ isOpen, onClose, user, onSave }) {
               className="bg-inherit w-2/3 border rounded-lg p-1 text-sm focus:outline-none focus:border-2 focus:border-gray-300"
             />
           </div>
-          
+
           <div className="mt-4 flex justify-end">
             <button
               className="bg-gray-500 hover:bg-gray-700  text-white py-1.5 px-3 rounded-xl transition duration-300"
