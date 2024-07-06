@@ -44,22 +44,13 @@ The **React User Management System** is a robust and intuitive web application d
 ## Usage
 
 1. **Add a User**:
-    - Click on the "افزودن" (Add) button.
-    - Fill in the name, family name, and ID card number fields.
-    - Click "Save" to add the user.
 
 2. **Edit a User**:
-    - Click the "Edit" button next to the user's information.
-    - Modify the desired fields.
-    - Click "Save" to update the user's information.
 
 3. **Delete a User**:
-    - Click the "Delete" button next to the user's information.
-    - Confirm the deletion in the popup modal.
 
 4. **Search for a User**:
-    - Enter the name, family name, or ID card number in the search fields.
-    - The user list will filter in real-time based on the search criteria.
+
 
 ## Directory Structure
 
