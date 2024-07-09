@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 function AddUser({ isOpen, onClose, onSave }) {
-  const [newUser, setNewUser] = useState({ name: "", familyName: "", idCardNumber: "" });
+  const [newUser, setNewUser] = useState({
+    name: "",
+    familyName: "",
+    idCardNumber: "",
+  });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -11,13 +15,13 @@ function AddUser({ isOpen, onClose, onSave }) {
     }));
   };
 
-    // Regular expression for Persian characters
-    const persianRegex = /^[\u0600-\u06FF\s]+$/;
+  // Regular expression for Persian characters
+  const persianRegex = /^[\u0600-\u06FF\s]+$/;
 
-    // Validation function for Persian characters
-    const isPersian = (value) => {
-      return persianRegex.test(value);
-    };
+  // Validation function for Persian characters
+  const isPersian = (value) => {
+    return persianRegex.test(value);
+  };
 
   const handleSave = () => {
     if (!newUser.name || !newUser.familyName || !newUser.idCardNumber) {
@@ -25,8 +29,8 @@ function AddUser({ isOpen, onClose, onSave }) {
       return;
     }
 
-    if (newUser.name.length < 2) {  
-      alert("نام باید حداقل ۲ کاراکتر باشد");  
+    if (newUser.name.length < 2) {
+      alert("نام باید حداقل ۲ کاراکتر باشد");
       return;
     }
 
@@ -40,7 +44,6 @@ function AddUser({ isOpen, onClose, onSave }) {
       return;
     }
 
-
     if (!isPersian(newUser.familyName)) {
       alert("نام خانوادگی باید فقط شامل حروف فارسی باشد");
       return;
@@ -51,7 +54,7 @@ function AddUser({ isOpen, onClose, onSave }) {
       return;
     }
 
-    if (newUser.idCardNumber.length !== 10) {
+    if (newUser.idCardNumber.length <= 3) {
       alert("کد ملی باید دقیقاً 10 رقم باشد");
       return;
     }
@@ -72,7 +75,10 @@ function AddUser({ isOpen, onClose, onSave }) {
       <div className="bg-white rounded-lg shadow-xl w-full max-w-md p-4">
         <div className="flex justify-between items-center border-b pb-2">
           <h2 className="text-xl font-bold">افزودن کاربر جدید</h2>
-          <button className="text-gray-500 hover:text-gray-700" onClick={onClose}>
+          <button
+            className="text-gray-500 hover:text-gray-700"
+            onClick={onClose}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -81,7 +87,11 @@ function AddUser({ isOpen, onClose, onSave }) {
               stroke="currentColor"
               className="size-7 rounded-full inline-block p-1 bg-gray-400 text-white hover:bg-gray-600 transition duration-300"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18 18 6M6 6l12 12"
+              />
             </svg>
           </button>
         </div>

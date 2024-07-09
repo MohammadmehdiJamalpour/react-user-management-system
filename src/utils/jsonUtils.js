@@ -1,4 +1,4 @@
-// jsonUtils.js
+
 export const getUsers = async () => {
   const users = JSON.parse(localStorage.getItem("users"));
   if (!users) throw new Error("No users found");
